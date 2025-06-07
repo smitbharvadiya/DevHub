@@ -1,10 +1,38 @@
-
+import { useState, useMemo } from "react"
 
 export default function RepoList({ repos }) {
 
+    const [sortType, setSortType] = useState("UPDATED_AT");
+
+    const sortedRepo = useMemo(() => {
+        switch (sortType) {
+            case "STAR": return [...repos].sort((a, b) => b.stargazerCount - a.stargazerCount );
+            case "UPDATED_AT": return [...repos].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt) );
+            case "FORKED": return [...repos].sort((a, b) => b.forkCount - a.forkCount );
+            case "HIDDEN-GEM": return [...repos]
+                .filter(repo => repo.stargazerCount < 10)
+                .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+                .slice(0, 3);
+            default: return repos;
+        }
+    }, [sortType, repos]);
+
+
+
+
     return (
         <div className="bg-white mx-6 my-3 px-6 rounded-xl shadow-md">
-            <h2 className="font-bold text-2xl mx-4 pt-2 text-gray-800 my-4">Public Repositories</h2>
+            <h2 className="font-bold text-2xl mx-4 pt-4 text-gray-800">Public Repositories</h2>
+            <div className="flex items-center justify-end mb-2 mr-8">
+                    <label className="mr-2 font-medium text-sm text-gray-700">Sort by:</label>
+                    <select value={sortType} onChange={(e) => setSortType(e.target.value)} 
+                        className="border boder-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white transition-all duration-200 ease-in-out">
+                        <option value="UPDATED_AT">Recently Updated</option>
+                        <option value="STAR">Most Stars</option>
+                        <option value="FORKED">Most Forked</option>
+                        <option value="HIDDEN-GEM">Hidden Gems</option>
+                    </select>
+                </div>
             <div className="grid grid-cols-7 gap-6 bg-gray-100 rounded-t-md font-semibold border-b pb-2 font-poppins px-6 py-4">
                 <span className="col-span-2">Name</span>
                 <span className="col-span-2">Description</span>
@@ -14,7 +42,8 @@ export default function RepoList({ repos }) {
             </div>
 
             <div className="pb-6 h-100 overflow-y-auto">
-                {repos.map((repo) => (
+                
+                {sortedRepo.map((repo) => (
 
                     <div key={repo.id} className=" grid grid-cols-7 gap-6  border-b last:border-none hover:bg-gray-50 p-6 ">
                         <a

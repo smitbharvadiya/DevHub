@@ -1,5 +1,6 @@
 import React from 'react';
 import '../index.css'
+import LoginButton from './LoginBtn';
 
 function Navbar(){
 
@@ -13,8 +14,8 @@ function Navbar(){
                 <li><a href="/repo" className='text-lgrey'>Repositories</a></li>
                 <li><a href="/trending" className='text-lgrey'>Trending</a></li>
             </ul>
-            <button className='h-7 w-34 text-[14px] bg-black text-white mr-20 rounded-full font-inter'>Connect GitHub</button>
-        </nav>
+            <LoginButton/>
+            </nav>
     )
 }
 
