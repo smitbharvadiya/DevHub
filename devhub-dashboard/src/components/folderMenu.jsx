@@ -5,7 +5,7 @@ import { collection, addDoc, getDocs, deleteDoc, updateDoc, doc, serverTimestamp
 import { auth } from "../../firebase";
 import { useEffect, useState } from "react";
 
-export default function FolderMenu({ onClose }) {
+export default function FolderMenu({ onClose, selectedRepos }) {
     const [folders, setFolders] = useState([]);
     const [newFolder, setNewFolder] = useState("");
     const [showInput, setShowInput] = useState(false);
@@ -122,6 +122,24 @@ export default function FolderMenu({ onClose }) {
 
     }
 
+    const saveReposToFolder = async (folderId, selectedRepos) => {
+        try {
+            const folderRef = collection(db, "folders", folderId, "repos");
+
+            for (const repo of selectedRepos) {
+                await addDoc(folderRef, {
+                    ...repo,
+                    savedAt: new Date(),
+                });
+            }
+
+            onClose();
+            alert("Repos saved successfully!");
+        } catch (err) {
+            console.error("Error saving repos:", err);
+        }
+    };
+
 
 
     return (
@@ -139,11 +157,12 @@ export default function FolderMenu({ onClose }) {
                     <p className="text-center text-gray-500 mb-2">No folders yet.</p>
                 )}
                 {folders.map((folder) => (
-                    <div key={folder.id} className="flex justify-between bg-gray-100 hover:bg-gray-50 hover:shadow hover:border cursor-pointer p-2 rounded-md text-gray-800">
+                    <div key={folder.id} onClick={ () => saveReposToFolder(folder.id, selectedRepos)} className="flex justify-between bg-gray-100 hover:bg-gray-50 hover:shadow hover:border cursor-pointer p-2 rounded-md text-gray-800">
                         {folder.name}
                         <div>
                             <button
-                                onClick={() => {
+                                onClick={(e) => {
+                                    e.stopPropagation();
                                     setUpdateFolderId(folder.id)
                                     setShowUpdateInput(true);
                                     setShowInput(false);
@@ -152,7 +171,8 @@ export default function FolderMenu({ onClose }) {
                                 <FontAwesomeIcon icon={faPenToSquare} />
                             </button>
                             <button
-                                onClick={() => {
+                                onClick={(e) => {
+                                    e.stopPropagation();
                                     if (confirm("Are you sure you want to delete this folder?")) {
                                         deleteFolder(folder.id);
                                     }
@@ -181,12 +201,12 @@ export default function FolderMenu({ onClose }) {
                 ) : (
                     <div className="flex justify-end">
                         <button
-                        onClick={() => {setShowInput(true); setShowUpdateInput(false)}}
-                        className="px-4 py-1 mx-4 my-4 border bg-blue-600 text-white rounded-md hover:bg-blue-500">
-                        Add New Folder
-                    </button>
+                            onClick={() => { setShowInput(true); setShowUpdateInput(false) }}
+                            className="px-4 py-1 mx-4 my-4 border bg-blue-600 text-white rounded-md hover:bg-blue-500">
+                            Add New Folder
+                        </button>
                     </div>
-                    
+
                 )}
                 {showUpdateInput &&
                     <div className="flex space-x-2 mx-4 mb-4">
