@@ -129,6 +129,7 @@ export default function FolderMenu({ onClose, selectedRepos }) {
             for (const repo of selectedRepos) {
                 await addDoc(folderRef, {
                     ...repo,
+                     folderId: folderId,
                     savedAt: new Date(),
                 });
             }

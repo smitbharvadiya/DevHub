@@ -50,6 +50,9 @@ export const fetchGitHubUser = async (username) => {
               url
               updatedAt
               forkCount
+              owner {
+                 login
+               }
               issues(states: OPEN) {
                     totalCount
                 }

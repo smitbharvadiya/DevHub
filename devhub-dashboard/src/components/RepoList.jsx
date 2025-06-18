@@ -48,6 +48,7 @@ export default function RepoList({ repos }) {
                 stargazerCount: repo.stargazerCount,
                 forkCount: repo.forkCount,
                 updatedAt: repo.updatedAt,
+                owner: repo.owner?.login || "unknown",
             }]);
         } else {
             setSelectedRepos((prev) => prev.filter((r) => r.id !== repo.id));
