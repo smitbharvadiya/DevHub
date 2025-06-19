@@ -127,15 +127,24 @@ export default function FolderMenu({ onClose, selectedRepos }) {
             const folderRef = collection(db, "folders", folderId, "repos");
 
             for (const repo of selectedRepos) {
-                await addDoc(folderRef, {
-                    ...repo,
-                     folderId: folderId,
-                    savedAt: new Date(),
-                });
+
+                const q = query(folderRef, where("id", "==", repo.id));
+                const duplicate = await getDocs(q);
+
+                if (duplicate.empty) {
+                    await addDoc(folderRef, {
+                        ...repo,
+                        folderId: folderId,
+                        savedAt: new Date(),
+                    });
+                    alert("Repos saved successfully!");
+                } else {
+                    alert(`Repo ${repo.name} already exists in folder.`);
+                }
+
             }
 
             onClose();
-            alert("Repos saved successfully!");
         } catch (err) {
             console.error("Error saving repos:", err);
         }
@@ -158,7 +167,7 @@ export default function FolderMenu({ onClose, selectedRepos }) {
                     <p className="text-center text-gray-500 mb-2">No folders yet.</p>
                 )}
                 {folders.map((folder) => (
-                    <div key={folder.id} onClick={ () => saveReposToFolder(folder.id, selectedRepos)} className="flex justify-between bg-gray-100 hover:bg-gray-50 hover:shadow hover:border cursor-pointer p-2 rounded-md text-gray-800">
+                    <div key={folder.id} onClick={() => saveReposToFolder(folder.id, selectedRepos)} className="flex justify-between bg-gray-100 hover:bg-gray-50 hover:shadow hover:border cursor-pointer p-2 rounded-md text-gray-800">
                         {folder.name}
                         <div>
                             <button
