@@ -9,7 +9,7 @@ import { generateSummary } from "../utils/generateSummary";
 import { summaryOfOpenAI } from "../utils/summarizeWithOpenAI";
 import AISummaryBox from "../components/AISummary";
 import Lottie from "lottie-react";
-import DashLoading from "../assets/animations/DashLoading.json"
+import pageLoading from "../assets/animations/pageLoading.json"
 import CommitHeatmap from "../components/CommitHeatmap";
 
 export default function Dashboard() {
@@ -158,7 +158,7 @@ export default function Dashboard() {
 
 
     if (!user) return <div className="flex justify-center items-center max-h-[300px] w-full h-full bg-white">
-        <Lottie animationData={DashLoading} loop={true} className="w-40 h-40" />
+        <Lottie animationData={pageLoading} loop={true} className="w-40 h-40" />
     </div>;
     if (error) return <p className="text-red-500 text-center mt-4">{error}</p>;
 

@@ -13,6 +13,8 @@ export default function FolderMenu({ onClose, selectedRepos }) {
     const [updateFolderName, setUpdateFolderName] = useState("");
     const [updateFolderId, setUpdateFolderId] = useState(null);
     const [showUpdateInput, setShowUpdateInput] = useState(false);
+    const [loading, setLoading] = useState(true);
+
 
     const createFolder = async () => {
         const trimmed = newFolder.trim();
@@ -55,6 +57,7 @@ export default function FolderMenu({ onClose, selectedRepos }) {
 
     const fetchFolders = async (userId) => {
         try {
+            setLoading(true);
             const q = query(
                 collection(db, "folders"),
                 where("userId", "==", userId)
@@ -69,6 +72,8 @@ export default function FolderMenu({ onClose, selectedRepos }) {
         }
         catch (e) {
             console.error(e);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -126,6 +131,10 @@ export default function FolderMenu({ onClose, selectedRepos }) {
         try {
             const folderRef = collection(db, "folders", folderId, "repos");
 
+            if (selectedRepos.length == 0) {
+                alert("Please select repo to bookmark")
+            }
+
             for (const repo of selectedRepos) {
 
                 const q = query(folderRef, where("id", "==", repo.id));
@@ -163,36 +172,45 @@ export default function FolderMenu({ onClose, selectedRepos }) {
                 </button>
             </div>
             <div className="space-y-2 mb-4 mx-4 h-70 overflow-y-auto">
-                {folders.length === 0 && (
-                    <p className="text-center text-gray-500 mb-2">No folders yet.</p>
-                )}
-                {folders.map((folder) => (
-                    <div key={folder.id} onClick={() => saveReposToFolder(folder.id, selectedRepos)} className="flex justify-between bg-gray-100 hover:bg-gray-50 hover:shadow hover:border cursor-pointer p-2 rounded-md text-gray-800">
-                        {folder.name}
-                        <div>
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setUpdateFolderId(folder.id)
-                                    setShowUpdateInput(true);
-                                    setShowInput(false);
-                                }}
-                                className="px-3 hover:text-gray-600 cursor-pointer">
-                                <FontAwesomeIcon icon={faPenToSquare} />
-                            </button>
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    if (confirm("Are you sure you want to delete this folder?")) {
-                                        deleteFolder(folder.id);
-                                    }
-                                }}
-                                className="px-2 hover:text-gray-600 cursor-pointer">
-                                <FontAwesomeIcon icon={faTrash} />
-                            </button>
-                        </div>
+                {loading ? 
+                (
+                    <div className="flex justify-center items-center h-20">
+                        <div className="animate-spin rounded-full h-6 w-6 border-4 border-blue-500 border-t-transparent"></div>
                     </div>
-                ))}
+                ) :
+                    
+                (folders.length === 0 ? 
+                    (
+                            <p className="text-center text-gray-500 mb-2">No folders yet.</p>
+                    ) :
+                    (folders.map((folder) => (
+                        <div key={folder.id} onClick={() => saveReposToFolder(folder.id, selectedRepos)} className="flex justify-between bg-gray-100 hover:bg-gray-50 hover:shadow hover:border cursor-pointer p-2 rounded-md text-gray-800">
+                            {folder.name}
+                            <div>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setUpdateFolderId(folder.id)
+                                        setShowUpdateInput(true);
+                                        setShowInput(false);
+                                    }}
+                                    className="px-3 hover:text-gray-600 cursor-pointer">
+                                    <FontAwesomeIcon icon={faPenToSquare} />
+                                </button>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        if (confirm("Are you sure you want to delete this folder?")) {
+                                            deleteFolder(folder.id);
+                                        }
+                                    }}
+                                    className="px-2 hover:text-gray-600 cursor-pointer">
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </button>
+                            </div>
+                        </div>
+                    )))
+                )}
             </div>
             <div>
                 {showInput ? (
