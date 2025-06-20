@@ -172,60 +172,68 @@ export default function FolderMenu({ onClose, selectedRepos }) {
                 </button>
             </div>
             <div className="space-y-2 mb-4 mx-4 h-70 overflow-y-auto">
-                {loading ? 
-                (
-                    <div className="flex justify-center items-center h-20">
-                        <div className="animate-spin rounded-full h-6 w-6 border-4 border-blue-500 border-t-transparent"></div>
-                    </div>
-                ) :
-                    
-                (folders.length === 0 ? 
+                {loading ?
                     (
-                            <p className="text-center text-gray-500 mb-2">No folders yet.</p>
-                    ) :
-                    (folders.map((folder) => (
-                        <div key={folder.id} onClick={() => saveReposToFolder(folder.id, selectedRepos)} className="flex justify-between bg-gray-100 hover:bg-gray-50 hover:shadow hover:border cursor-pointer p-2 rounded-md text-gray-800">
-                            {folder.name}
-                            <div>
-                                <button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setUpdateFolderId(folder.id)
-                                        setShowUpdateInput(true);
-                                        setShowInput(false);
-                                    }}
-                                    className="px-3 hover:text-gray-600 cursor-pointer">
-                                    <FontAwesomeIcon icon={faPenToSquare} />
-                                </button>
-                                <button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        if (confirm("Are you sure you want to delete this folder?")) {
-                                            deleteFolder(folder.id);
-                                        }
-                                    }}
-                                    className="px-2 hover:text-gray-600 cursor-pointer">
-                                    <FontAwesomeIcon icon={faTrash} />
-                                </button>
-                            </div>
+                        <div className="flex justify-center items-center h-20">
+                            <div className="animate-spin rounded-full h-6 w-6 border-4 border-blue-500 border-t-transparent"></div>
                         </div>
-                    )))
-                )}
+                    ) :
+
+                    (folders.length === 0 ?
+                        (
+                            <p className="text-center text-gray-500 mb-2">No folders yet.</p>
+                        ) :
+                        (folders.map((folder) => (
+                            <div key={folder.id} onClick={() => saveReposToFolder(folder.id, selectedRepos)} className="flex justify-between bg-gray-100 hover:bg-gray-50 hover:shadow hover:border cursor-pointer p-2 rounded-md text-gray-800">
+                                {folder.name}
+                                <div>
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setUpdateFolderId(folder.id)
+                                            setShowUpdateInput(true);
+                                            setShowInput(false);
+                                        }}
+                                        className="px-3 hover:text-gray-600 cursor-pointer">
+                                        <FontAwesomeIcon icon={faPenToSquare} />
+                                    </button>
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (confirm("Are you sure you want to delete this folder?")) {
+                                                deleteFolder(folder.id);
+                                            }
+                                        }}
+                                        className="px-2 hover:text-gray-600 cursor-pointer">
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </button>
+                                </div>
+                            </div>
+                        )))
+                    )}
             </div>
             <div>
                 {showInput ? (
-                    <div className="flex space-x-2 mx-4 mb-4">
-                        <input
-                            type="text"
-                            value={newFolder}
-                            onChange={(e) => setNewFolder(e.target.value)}
-                            placeholder="Enter folder name"
-                            className="border p-2 rounded-md w-full"
-                        />
-                        <button onClick={createFolder} className="bg-blue-600 text-white px-4 py-1 rounded-md">
-                            Save
-                        </button>
-                    </div>
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                createFolder();
+                            }}
+                              className="flex space-x-2 mx-4 mb-4">
+                            <input
+                                type="text"
+                                value={newFolder}
+                                onChange={(e) => setNewFolder(e.target.value)}
+                                placeholder="Enter folder name"
+                                className="border p-2 rounded-md w-full"
+                            />
+                            <button
+                                type="submit"
+                                className="bg-blue-600 text-white px-4 py-1 rounded-md">
+                                Save
+                            </button>
+                        </form>
+
                 ) : (
                     <div className="flex justify-end">
                         <button
@@ -251,6 +259,6 @@ export default function FolderMenu({ onClose, selectedRepos }) {
                     </div>
                 }
             </div>
-        </div>
+        </div >
     )
 };
