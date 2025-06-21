@@ -12,7 +12,7 @@ export default function AISummaryBox({ summary, loadingStatus }) {
                 </div>)
                 :
                 (
-                    <div className="max-h-[300px] w-full overflow-y-auto bg-gradient-to-br from-white via-gray-50 to-gray-100 animate-fadeIn backdrop-blur-sm rounded-xl shadow-md mr-6 ml-3 my-3 p-6">
+                    <div className="max-h-74 w-full overflow-y-auto bg-gradient-to-br from-white via-gray-50 to-gray-100 animate-fadeIn backdrop-blur-sm rounded-xl shadow-md mr-6 ml-3 my-3 px-6 pt-2">
                         <h2 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent  mb-3 flex items-center gap-2.5">
                             <img src={aiIcon} alt="AI Icon" className="h-6 w-6 object-contain drop-shadow-glow animate-pulse" />
                             AI Powered Summary

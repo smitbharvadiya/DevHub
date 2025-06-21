@@ -12,7 +12,7 @@ export default function CommitHeatmap({ commitdata }) {
     const values = commitdata;
 
     return (
-        <div className="my-6 mx-4 px-4 bg-white shadow-md rounded-xl">
+        <div className="my-4 mx-6 px-4 bg-white shadow-md rounded-xl">
             <h2 className="text-xl font-bold mb-4 pt-4 pl-4">Commit Activity</h2>
             <CalendarHeatmap
                 startDate={oneYearAgo}

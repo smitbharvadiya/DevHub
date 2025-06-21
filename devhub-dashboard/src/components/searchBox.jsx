@@ -19,9 +19,9 @@ export default function SearchBox() {
 
 
     return (
-        <div className="w-full h-110 flex flex-col justify-center items-center font-inter leading-12">
+        <div className="w-full min-h-screen flex flex-col items-center font-inter leading-12 pt-32">
             <h1 className="text-black font-bold tracking-tight text-[42px]">Developer dashboard</h1>
-            <h1 className="text-lgrey font-bold tracking-tight text-[40px] mb-15">Track GitHub activity</h1>
+            <h1 className="text-lgrey font-bold tracking-tight text-[40px] mb-18">Track GitHub activity</h1>
             <form onSubmit={handleSubmit}>
                 <div className="w-60 h-10 flex justify-between items-center rounded-full shadow">
                     <input value={username} onChange={(e) => { setUsername(e.target.value) }} className="w-40 h-10 text-sm px-4 rounded-full focus:outline-none focus:ring-0 focus:border-transparent" type="text" placeholder="Search..." />
