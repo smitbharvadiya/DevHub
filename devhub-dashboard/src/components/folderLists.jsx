@@ -59,6 +59,7 @@ export default function FolderList() {
                     <Lottie animationData={pageLoading} loop={true} className="w-40 h-40" />
                 </div>
             ) : (
+                <div className="h-[calc(100vh-80px)]">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-6">
 
 
@@ -83,7 +84,7 @@ export default function FolderList() {
                 </div>
 
 
-
+</div>
             )
             }
         </>
