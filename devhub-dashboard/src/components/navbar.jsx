@@ -10,7 +10,7 @@ export default function Navbar() {
         <nav className='w-full border-b px-4 py-3 overflow-x-hidden'>
 
             <div className="flex justify-between items-center">
-                <a href="/" className='font-bold text-lg'>Dashflow®</a>
+                <a href="/" className='font-bold text-lg'>DevHub®</a>
 
                 <button
                     className="md:hidden text-xl"
