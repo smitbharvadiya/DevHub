@@ -8,11 +8,17 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     react(),
-    // require('@tailwindcss/line-clamp'),
   ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+  },
+   build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
     },
   },
 })
