@@ -4,6 +4,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Navbar from "../components/navbar";
+import Footer from '../components/footer';
 import Lottie from "lottie-react";
 import pageLoading from "../assets/animations/pageLoading.json";
 
@@ -55,14 +56,15 @@ export default function FolderRepoList() {
                     </a>
                 </div>
 
-
-                <div className="grid grid-cols-9 gap-6 bg-gray-100 rounded-t-md font-semibold border-b pb-2 font-poppins px-6 py-4">
-                    <span className="col-span-2">Name</span>
-                    <span className="col-span-3">Description</span>
-                    <span>Owner</span>
-                    <span>Star</span>
-                    <span>Forks</span>
-                    <span>Last Updated</span>
+                <div className="w-full overflow-x-auto">
+                    <div className="min-w-[800px] grid grid-cols-9 gap-6 bg-gray-100 rounded-t-md font-semibold border-b pb-2 font-poppins px-6 py-4">
+                        <span className="col-span-2">Name</span>
+                        <span className="col-span-3">Description</span>
+                        <span>Owner</span>
+                        <span>Star</span>
+                        <span>Forks</span>
+                        <span>Last Updated</span>
+                    </div>
                 </div>
                 {loading ?
                     (
@@ -77,32 +79,34 @@ export default function FolderRepoList() {
                                 <p className="text-gray-500 text-center py-6">No repositories found in this folder.</p>
                             </div>
                         ) :
+                            <div className="w-full overflow-x-auto">
+                                <div className="pb-6 h-[calc(100vh-180px)] overflow-y-auto border-1 rounded-b-md">
 
-                            <div className="pb-6 h-100 overflow-y-auto border-1 rounded-b-md">
+                                    {(folderRepos[selectedFolderId] || []).map((repo) => (
+                                        <div key={repo.id} className="min-w-[800px] grid grid-cols-9 gap-6  border-b last:border-none hover:bg-gray-50 p-6 ">
+                                            <a
+                                                href={repo.url}
+                                                className="col-span-2 hover:underline text-blue-600 font-medium truncate"
+                                                target="_blank"
+                                                rel="noopener noreferrer" >
+                                                {repo.name}
+                                            </a>
+                                            <p className="col-span-3 text-sm text-gray-700 truncate line-clamp-1">{repo.description || "No Description Provided"}</p>
+                                            <p className="text-sm text-gray-600">{repo.owner}</p>
+                                            <span className="text-sm text-gray-600 pl-4">{repo.stargazerCount.toLocaleString()}</span>
+                                            <span className="text-sm text-gray-600 pl-4">{repo.forkCount.toLocaleString()}</span>
+                                            <span className="text-sm text-gray-600 pl-6">{new Date(repo.updatedAt).toLocaleDateString()}</span>
 
-                                {(folderRepos[selectedFolderId] || []).map((repo) => (
-                                    <div key={repo.id} className=" grid grid-cols-9 gap-6  border-b last:border-none hover:bg-gray-50 p-6 ">
-                                        <a
-                                            href={repo.url}
-                                            className="col-span-2 hover:underline text-blue-600 font-medium truncate"
-                                            target="_blank"
-                                            rel="noopener noreferrer" >
-                                            {repo.name}
-                                        </a>
-                                        <p className="col-span-3 text-sm text-gray-700 truncate line-clamp-1">{repo.description || "No Description Provided"}</p>
-                                        <p className="text-sm text-gray-600">{repo.owner}</p>
-                                        <span className="text-sm text-gray-600 pl-4">{repo.stargazerCount.toLocaleString()}</span>
-                                        <span className="text-sm text-gray-600 pl-4">{repo.forkCount.toLocaleString()}</span>
-                                        <span className="text-sm text-gray-600 pl-6">{new Date(repo.updatedAt).toLocaleDateString()}</span>
+                                        </div>
+                                    ))}
 
-                                    </div>
-                                ))}
-
+                                </div>
                             </div>
                         }
                     </>
                 }
             </div>
+            <Footer/>
         </>
     )
 }

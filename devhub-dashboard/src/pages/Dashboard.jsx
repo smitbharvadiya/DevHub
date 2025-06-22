@@ -11,6 +11,7 @@ import AISummaryBox from "../components/AISummary";
 import Lottie from "lottie-react";
 import pageLoading from "../assets/animations/pageLoading.json"
 import CommitHeatmap from "../components/CommitHeatmap";
+import Footer from '../components/footer';
 
 export default function Dashboard() {
     const { username } = useParams();
@@ -168,12 +169,13 @@ export default function Dashboard() {
         <div className="bg-myWhite pb-6">
             <Navbar />
             {user && <Profile user={user} />}
-            <div className="flex box-border">
+            <div className="flex flex-col sm:flex-row box-border px-4 gap-4 sm:px-6 py-2 sm:h-74">
                 <LangDonut chartData={chartData} />
                 <AISummaryBox summary={aiSummary} loadingStatus={loadingSummary} />
             </div>
             <RepoList repos={repos} />
             <CommitHeatmap commitdata={commitHeatmap} />
+            <Footer />
         </div>
 
     )

@@ -26,44 +26,44 @@ export default function Profile({ user }) {
     }, [user]);
 
     return (
-        <div className="mx-6 my-3 rounded-xl shadow-md bg-white">
+        <div className="mx-4 sm:mx-6 my-3 rounded-xl shadow-md bg-white">
 
-            <div className="flex">
+            <div className="flex flex-col md:flex-row">
 
-                <div className="w-60 flex flex-col justify-center items-center mx-6 mt-6 mb-4">
+                <div className="w-full sm:w-60 flex flex-col justify-center items-center px-6 pt-6 pb-4">
                     <img src={user.avatarUrl} alt="Avatar" className="w-28 h-28 rounded-full" />
-                    <h1 className="font-bold mt-2 leading-4">{user.name}</h1>
+                    <h1 className="font-bold mt-4 sm:mt-2 leading-4">{user.name}</h1>
                     <p className="text-gray-600">@{user.login}</p>
                 </div>
 
                 {/* Stats */}
                 {userType === 'User' ? (
-                    <div className="flex justify-between items-center w-100 ml-20">
+                    <div className="w-full md:flex-1 flex justify-between items-center py-4 px-6 sm:pl-10">
                         <div>
-                            <p className="font-oswald text-4xl pb-2">{user.followers?.totalCount.toLocaleString()}</p>
+                            <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.followers?.totalCount.toLocaleString()}</p>
                             <p className="font-poppins">Followers</p>
                         </div>
                         <div>
-                            <p className="font-oswald text-4xl pb-2">{user.following?.totalCount.toLocaleString()}</p>
+                            <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.following?.totalCount.toLocaleString()}</p>
                             <p className="font-poppins">Following</p>
                         </div>
                         <div>
-                            <p className="font-oswald text-4xl pb-2">{user.repositories?.totalCount}</p>
+                            <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.repositories?.totalCount}</p>
                             <p className="font-poppins">Repos</p>
                         </div>
                     </div>) :
                     (
                         <div className="flex justify-between items-center w-100 ml-20">
                             <div>
-                                <p className="font-oswald text-4xl pb-2">{user.repositories?.totalCount}</p>
+                                <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.repositories?.totalCount}</p>
                                 <p className="font-poppins">Repositories</p>
                             </div>
                             <div>
-                                <p className="font-oswald text-4xl pb-2">{user.repositories?.nodes.reduce((sum, repo) => sum + repo.stargazerCount, 0)}</p>
+                                <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.repositories?.nodes.reduce((sum, repo) => sum + repo.stargazerCount, 0)}</p>
                                 <p className="font-poppins">Total Stars</p>
                             </div>
                             <div>
-                                <p className="font-oswald text-4xl pb-2">{user.membersWithRole?.totalCount}</p>
+                                <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.membersWithRole?.totalCount}</p>
                                 <p className="font-poppins">Members</p>
                             </div>
                         </div>
@@ -71,18 +71,18 @@ export default function Profile({ user }) {
 
             </div>
 
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-wrap px-4 sm:px-8 py-3 gap-y-2 text-sm">
 
-                <div className="flex">
-                    {user.location && <p className="ml-8 x-6">
+                <div className="flex flex-wrap gap-x-6 gap-y-2 items-center">
+                    {user.location && <p className="flex items-center text-gray-700">
                         <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-gray-500" />
                         {user.location}
                     </p>}
-                    {user.email && <p className="mx-6">
+                    {user.email && <p className="flex items-center text-gray-700">
                         <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-gray-500" />
                         {user.email}
                     </p>}
-                    {user.websiteUrl && <p className="mx-6"> 🔗 {" "}
+                    {user.websiteUrl && <p className="flex items-center text-gray-700"> 🔗 {" "}
                         <a href={user.websiteUrl.startsWith("http") ? user.websiteUrl : `https://${user.websiteUrl}`}
                             target="_blank" rel="noopener noreferrer">
                             Blog
@@ -92,7 +92,7 @@ export default function Profile({ user }) {
                 </div>
 
                 {/* <p>{new Date(user.created_at).toLocaleString()}</p> */}
-                <div className="h-8 w-35 border-1 border-black text-black hover:bg-black hover:text-white flex justify-center items-center rounded-full transition-all duration-400 ease-in-out  mr-4 mb-2">
+                <div className="h-8 w-35 border-1 border-black text-black hover:bg-black hover:text-white flex justify-center items-center rounded-full transition-all duration-400 ease-in-out  px-4 py-2">
                     <a href={user.url} target="_blank" rel="noopener noreferrer">
                         <FontAwesomeIcon icon={faGithub} className="mr-2" />
                         View GitHub
