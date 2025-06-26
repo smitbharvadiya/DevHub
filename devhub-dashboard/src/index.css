@@ -15,20 +15,21 @@
 }
 
 .color-empty {
-  fill: #FFEEEE;
+  fill: #E6F0FF;  
 }
 .color-scale-1 {
-  fill: #FFCCCC;
+  fill: #B3D1FF;  
 }
 .color-scale-2 {
-  fill: #FFAAAA;
-}
+  fill: #80B3FF; 
+}  
 .color-scale-3 {
-  fill: #FF8888;
+  fill: #4D94FF;  
 }
 .color-scale-4 {
-  fill: #FF6666;
+  fill: #1A75FF;  
 }
+
 
 
 @theme inline {

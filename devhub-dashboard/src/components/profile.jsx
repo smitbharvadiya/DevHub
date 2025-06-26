@@ -5,6 +5,8 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import { detectGitHubEntityType } from "../api/githubGraphQL";
 import { useState } from 'react';
 import { useEffect } from "react";
+import { faUserFriends, faUserPlus, faCodeBranch } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 export default function Profile({ user }) {
 
@@ -38,40 +40,74 @@ export default function Profile({ user }) {
 
                 {/* Stats */}
                 {userType === 'User' ? (
-                    <div className="w-full md:flex-1 flex justify-between items-center py-4 px-6 sm:pl-10">
-                        <div>
-                            <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.followers?.totalCount.toLocaleString()}</p>
-                            <p className="font-poppins">Followers</p>
+                    <div className="w-full flex flex-row justify-between items-center px-4 py-4 gap-3">
+                        {/* Followers */}
+                        <div className="w-1/3 text-center p-3 sm:p-4 rounded-xl bg-gradient-to-br from-white to-gray-50 shadow-sm hover:shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02]">
+                            <p className="font-inter text-xl sm:text-4xl pb-1 sm:pb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 truncate">
+                                {user.followers?.totalCount.toLocaleString()}
+                            </p>
+                            <p className="font-poppins text-gray-600 text-xs sm:text-sm flex items-center justify-center gap-1 sm:gap-3">
+                                <FontAwesomeIcon icon={faUserFriends} className="text-blue-400 text-sm" />
+                                Followers
+                            </p>
                         </div>
-                        <div>
-                            <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.following?.totalCount.toLocaleString()}</p>
-                            <p className="font-poppins">Following</p>
+
+                        {/* Following */}
+                        <div className="w-1/3 text-center p-3 sm:p-4 rounded-xl bg-gradient-to-br from-white to-gray-50 shadow-sm hover:shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02]">
+                            <p className="font-inter text-xl sm:text-4xl pb-1 sm:pb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 truncate">
+                                {user.following?.totalCount.toLocaleString()}
+                            </p>
+                            <p className="font-poppins text-gray-600 text-xs sm:text-sm flex items-center justify-center gap-1 sm:gap-3">
+                                <FontAwesomeIcon icon={faUserPlus} className="text-purple-400 text-sm" />
+                                Following
+                            </p>
                         </div>
-                        <div>
-                            <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.repositories?.totalCount}</p>
-                            <p className="font-poppins">Repos</p>
+
+                        {/* Repos */}
+                        <div className="w-1/3 text-center p-3 sm:p-4 rounded-xl bg-gradient-to-br from-white to-gray-50 shadow-sm hover:shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02]">
+                            <p className="font-inter text-xl sm:text-4xl pb-1 sm:pb-2 text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-teal-500 truncate">
+                                {user.repositories?.totalCount}
+                            </p>
+                            <p className="font-poppins text-gray-600 text-xs sm:text-sm flex items-center justify-center gap-1 sm:gap-3">
+                                <FontAwesomeIcon icon={faCodeBranch} className="text-green-400 text-sm" />
+                                Repos
+                            </p>
                         </div>
-                    </div>) :
+                    </div>
+
+                ) :
                     (
-                        <div className="flex justify-between items-center w-100 ml-20">
-                            <div>
-                                <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.repositories?.totalCount}</p>
-                                <p className="font-poppins">Repositories</p>
+                        <div className="w-full flex flex-row flex-wrap justify-between items-center gap-3 px-4 py-4">
+                            {/* Repositories */}
+                            <div className="flex-1 min-w-[100px] text-center p-3 sm:p-4 rounded-xl bg-gradient-to-br from-white to-gray-50 shadow-sm hover:shadow-md transition-transform duration-300 transform hover:-translate-y-1 hover:scale-[1.02]">
+                                <p className="font-oswald text-xl sm:text-4xl pb-1 sm:pb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 truncate">
+                                    {user.repositories?.totalCount}
+                                </p>
+                                <p className="font-poppins text-gray-600 text-xs sm:text-sm">Repositories</p>
                             </div>
-                            <div>
-                                <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.repositories?.nodes.reduce((sum, repo) => sum + repo.stargazerCount, 0)}</p>
-                                <p className="font-poppins">Total Stars</p>
+
+                            {/* Total Stars */}
+                            <div className="flex-1 min-w-[100px] text-center p-3 sm:p-4 rounded-xl bg-gradient-to-br from-white to-gray-50 shadow-sm hover:shadow-md transition-transform duration-300 transform hover:-translate-y-1 hover:scale-[1.02]">
+                                <p className="font-oswald text-xl sm:text-4xl pb-1 sm:pb-2 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 truncate">
+                                    {user.repositories?.nodes.reduce((sum, repo) => sum + repo.stargazerCount, 0)}
+                                </p>
+                                <p className="font-poppins text-gray-600 text-xs sm:text-sm">Total Stars</p>
                             </div>
-                            <div>
-                                <p className="font-oswald text-3xl sm:text-4xl pb-2">{user.membersWithRole?.totalCount}</p>
-                                <p className="font-poppins">Members</p>
+
+                            {/* Members */}
+                            <div className="flex-1 min-w-[100px] text-center p-3 sm:p-4 rounded-xl bg-gradient-to-br from-white to-gray-50 shadow-sm hover:shadow-md transition-transform duration-300 transform hover:-translate-y-1 hover:scale-[1.02]">
+                                <p className="font-oswald text-xl sm:text-4xl pb-1 sm:pb-2 text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-teal-500 truncate">
+                                    {user.membersWithRole?.totalCount}
+                                </p>
+                                <p className="font-poppins text-gray-600 text-xs sm:text-sm">Members</p>
                             </div>
                         </div>
+
                     )}
 
             </div>
 
-            <div className="flex justify-between flex-wrap px-4 sm:px-8 py-3 gap-y-2 text-sm">
+            <div className="flex justify-between flex-wrap px-4 sm:px-8 py-3 gap-y-2 text-sm bg-gray-50 rounded-b-xl">
 
                 <div className="flex flex-wrap gap-x-6 gap-y-2 items-center">
                     {user.location && <p className="flex items-center text-gray-700">
@@ -82,7 +118,7 @@ export default function Profile({ user }) {
                         <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-gray-500" />
                         {user.email}
                     </p>}
-                    {user.websiteUrl && <p className="flex items-center text-gray-700"> 🔗 {" "}
+                    {user.websiteUrl && <p className="flex text-md items-center text-gray-700"> 🔗 {" "}
                         <a href={user.websiteUrl.startsWith("http") ? user.websiteUrl : `https://${user.websiteUrl}`}
                             target="_blank" rel="noopener noreferrer">
                             Blog
