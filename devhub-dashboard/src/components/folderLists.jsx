@@ -10,6 +10,7 @@ import folderIcon from "../assets/folderIcon.png";
 export default function FolderList() {
     const [folders, setFolders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(false);
 
     const navigate = useNavigate();
 
@@ -40,22 +41,36 @@ export default function FolderList() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
+                setUser(true);
                 fetchFolders(user.uid);
             } else {
-                console.log("User not logged in");
+                setUser(false);
+                setLoading(false);
             }
         });
 
         return () => unsubscribe();
     }, []);
 
+    if (!user) {
+        return (
+            <div className="flex flex-col justify-center items-center h-[calc(100vh-80px)] text-gray-700 bg-gray-50 px-4">
+  <div className="text-center">
+    <div className="text-5xl mb-4">🔐</div>
+    <p className="text-2xl font-semibold mb-2">You're not logged in</p>
+    <p className="text-base text-gray-500 mb-6">
+      Please log in to access your saved folders and bookmarks.
+    </p>
+  </div>
+</div>
 
-
+        );
+    }
 
     return (
         <>
             {loading ? (
-                <div className="flex justify-center items-center max-h-[300px] w-full h-full bg-white">
+                <div className="flex justify-center items-center min-h-screen w-full  bg-white">
                     <Lottie animationData={pageLoading} loop={true} className="w-40 h-40" />
                 </div>
             ) : (

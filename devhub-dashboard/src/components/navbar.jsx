@@ -42,16 +42,6 @@ export default function Navbar() {
                                 Repositories
                             </a>
                         </li>
-                        <li>
-                            <a
-                                href="/trending"
-                                className="font-medium text-gray-500 hover:text-black transition-colors duration-200
-                  relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 
-                  after:bg-indigo-600 hover:after:w-full after:transition-all after:duration-300"
-                            >
-                                Trending
-                            </a>
-                        </li>
                     </ul>
                     <div className="ml-4">
                         <LoginButton />
@@ -63,8 +53,6 @@ export default function Navbar() {
                 <div className="md:hidden mt-4 font-inter space-y-2 hover:text-black">
                     <a href="/" className="block text-lgrey hover:text-black">Home</a>
                     <a href="/bookmark" className="block text-lgrey hover:text-black">Repositories</a>
-                    <a href="/trending" className="block text-lgrey hover:text-black">Trending</a>
-
                     <LoginButton />
                 </div>)}
 

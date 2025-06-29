@@ -34,7 +34,7 @@ export default function ContactForm() {
                         placeholder="Name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="flex-1 px-3 py-2 placeholder:text-gray-400 rounded-md bg-gray-100 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-yellow-400"
+                        className="flex-1 px-3 py-2 placeholder:text-gray-400 rounded-md bg-gray-100 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-yellow-400 text-black"
                         required
                     />
                     <input
@@ -43,7 +43,7 @@ export default function ContactForm() {
                         placeholder="Email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="flex-1 px-3 py-2 placeholder:text-gray-400 rounded-md bg-gray-100 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-yellow-400"
+                        className="flex-1 px-3 py-2 placeholder:text-gray-400 rounded-md bg-gray-100 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-yellow-400 text-black"
                         required
                     />
                 </div>
@@ -55,7 +55,7 @@ export default function ContactForm() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={3}
-                    className="w-full px-3 py-2 placeholder:text-gray-400 rounded-md bg-gray-100 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-yellow-400 resize-none"
+                    className="w-full px-3 py-2 placeholder:text-gray-400 rounded-md bg-gray-100 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-yellow-400 resize-none text-black"
                     required
                 />
 

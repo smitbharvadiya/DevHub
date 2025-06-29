@@ -166,7 +166,7 @@ export default function Dashboard() {
 
 
     return (
-        <div className="bg-myWhite pb-6">
+        <div className="bg-myWhite">
             <Navbar />
             {user && <Profile user={user} />}
             <div className="flex flex-col sm:flex-row box-border px-4 gap-4 sm:px-6 py-2 sm:h-74">

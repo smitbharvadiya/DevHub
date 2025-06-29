@@ -33,19 +33,19 @@ export default function SearchBox() {
             <div className="flex justify-center space-x-4 mt-2">
                 <button
                     onClick={() => setUsername("torvalds")}
-                    className="text-blue-500 hover:underline"
+                    className="text-blue-500 hover:underline cursor-pointer"
                 >
                     torvalds
                 </button>
                 <button
                     onClick={() => setUsername("gaearon")}
-                    className="text-blue-500 hover:underline"
+                    className="text-blue-500 hover:underline cursor-pointer"
                 >
                     gaearon
                 </button>
                 <button
                     onClick={() => setUsername("addyosmani")}
-                    className="text-blue-500 hover:underline"
+                    className="text-blue-500 hover:underline cursor-pointer"
                 >
                     addyosmani
                 </button>

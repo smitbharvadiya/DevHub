@@ -7,14 +7,13 @@ export const detectGitHubEntityType = async (username) => {
     const res = await fetch(`https://api.github.com/users/${username}`);
     const data = await res.json();
 
-    if (data.message === "Not Found") {
-      throw new Error(`GitHub user/org "${username}" does not exist.`);
-    }
+  if (!res.ok) {
+  throw new Error(`GitHub API Error (${res.status}): ${data.message || 'Unknown error'}`);
+}
 
     return data.type; // 'User' or 'Organization'
   } catch (err) {
-    console.error("GitHub user/org type detection failed:", err);
-    throw err;
+    throw new Error("Failed to fetch GitHub user data. Please check the username.");
   }
 };
 

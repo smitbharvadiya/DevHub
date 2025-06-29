@@ -3,6 +3,7 @@ import Home from './pages/Hometemp';
 import Dashboard from './pages/Dashboard';
 import BookmarkRepo from './pages/bookmark';
 import FolderRepoList from './pages/FolderRepoList';
+import NotFound from './components/notFound';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/user/:username" element={<Dashboard />} />
         <Route path="/bookmark" element={<BookmarkRepo />} />
         <Route path="/bookmark/:folderId" element={<FolderRepoList/>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

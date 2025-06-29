@@ -18,7 +18,11 @@ export default function AISummaryBox({ summary, loadingStatus }) {
                             AI Powered Summary
                         </h2>
                         <p className="text-gray-700 leading-relaxed whitespace-pre-line tracking-wide text-[15px]">
-                            {summary}
+                            {summary ? (
+                                <p>{summary}</p>
+                            ) : (
+                                <p className="text-red-500">No summary available or failed to fetch.</p>
+                            )}
                         </p>
                     </div>)
             }</>

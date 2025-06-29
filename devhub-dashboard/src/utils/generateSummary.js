@@ -46,32 +46,37 @@ export const generateSummary = ({ readme, commit, repos, languageStats, entityTy
 
 
     return (
-        `
-You are an expert GitHub code analyst. Your job is to generate a helpful, honest, and human-readable summary about this ${entityType.toLowerCase()} based on their GitHub activity.
+`You are a senior GitHub code analyst and technical writer. Your task is to generate a concise, human-readable summary about this ${entityType.toLowerCase()}, based on their GitHub activity data.
 
-Analyze the following data:
+Use the structured information below to craft your response:
+
 ==========================
 📦 Repositories:
 ${repoData}
 
-📘 README Insights:
+📘 README Highlights:
 ${readmeData}
 
 📊 Commit Frequency:
 ${commitsData}
 
-Language Stats:
+🈯 Language Usage:
 ${languageStats}
-
 ==========================
-Using the above, write a summary of 200-250 words that highlights:
-- The main tech stack
-- Project focus and quality
-- Popularity indicators (stars/forks)
-- Coding habits and frequency
-- Anything notable from READMEs
 
-Write naturally and helpfully.
+Please write a summary of **200–250 words** that clearly covers the following:
+
+- ✅ The main technology stack they use (languages, tools, frameworks)
+- 🧠 The type and focus of their projects (e.g., full-stack apps, machine learning, libraries, etc.)
+- ⭐ Indicators of popularity or engagement (stars, forks, watchers)
+- ⏱️ Coding habits and activity patterns (based on commit history)
+- 📘 Noteworthy insights from project README files (tone, professionalism, documentation quality)
+
+Your summary should:
+- Sound like a human wrote it — friendly, informative, and objective
+- Be free of code, technical jargon (unless necessary), or bullet points
+- Avoid making assumptions not supported by the data
+- Help a recruiter, collaborator, or curious dev understand the profile at a glance
 `
     )
 }
