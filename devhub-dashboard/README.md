@@ -1,12 +1,72 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# DEVHUB
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ What is DevHub?
 
-## Expanding the ESLint configuration
+**DevHub** is a next-gen GitHub dashboard that transforms any developer’s public GitHub profile into an insightful, interactive visualization. Whether you're reviewing your own code journey or analyzing others, DevHub brings your GitHub to life.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+### Why DevHub?
+
+This project aims to streamline GitHub data exploration and project management through a modern, scalable interface. The core features include:
+
+
+## 🚀 Features
+
+- 🔍 **Search Any GitHub Profile**  
+  Instantly explore any developer's public GitHub data.
+
+- 📊 **AI-Powered GitHub Summary**  
+  Concise, human-readable project insights using integrated AI capabilities.
+
+- 🔥 **Contribution Heatmap**  
+  Visual commit activity over time in an elegant heatmap.
+
+- 📁 **Repo Explorer**  
+  Sort, filter, and inspect repositories by stars, forks, language, and more.
+
+- 📈 **Tech Stack Visualizer**  
+  Pie charts and graphs showing dominant languages and frameworks.
+
+- ⭐ **Folder & Bookmark Management**  
+  Save favorite repos into personalized folders for quick access.
+
+---
+## 💻 Tech Stack
+
+- **Frontend**: React, Tailwind CSS, Framer Motion  
+- **Backend**: Firebase (Authentication + Firestore)  
+- **APIs**: GitHub REST API  
+- **AI**: Gemini API for summaries
+
+
+## 🛠️ Installation
+
+Install my-project with npm
+
+```bash
+ git clone https://github.com/smitbharvadiya/DevHub.git
+ cd DevHub
+ npm install
+```
+    
+## 🤝 Contributing
+
+Contributions are welcome! Open an issue or submit a pull request to suggest improvements or new features.
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+## 🌐 Live Preview
+
+https://dev-hub-blond.vercel.app/
+
+
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
