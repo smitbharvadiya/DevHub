@@ -3,7 +3,7 @@ import Carousel from "./ReactBit/Carousel";
 
 const InsightShowcase = () => {
     return (
-        <section className="bg-white text-gray-800 mb-20 px-6 md:px-16 lg:px-24 flex flex-col md:flex-row items-center justify-between">
+        <section className="bg-white text-gray-800 mb-20 px-6 md:px-16 lg:px-24 flex flex-col md:flex-row items-center justify-between gap-20">
 
             <Carousel />
 
