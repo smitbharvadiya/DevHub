@@ -132,8 +132,11 @@ export default function FolderMenu({ onClose, selectedRepos }) {
             const folderRef = collection(db, "folders", folderId, "repos");
 
             if (selectedRepos.length == 0) {
-                alert("Please select repo to bookmark")
+                alert("Please select repo to bookmark");
+                return;
             }
+
+            let isSaved = false;
 
             for (const repo of selectedRepos) {
 
@@ -146,11 +149,13 @@ export default function FolderMenu({ onClose, selectedRepos }) {
                         folderId: folderId,
                         savedAt: new Date(),
                     });
-                    alert("Repos saved successfully!");
+                    isSaved = true;
                 } else {
                     alert(`Repo ${repo.name} already exists in folder.`);
                 }
-
+            }
+            if (isSaved) {
+                alert("Repos saved successfully!");
             }
 
             onClose();
@@ -214,25 +219,25 @@ export default function FolderMenu({ onClose, selectedRepos }) {
             </div>
             <div>
                 {showInput ? (
-                        <form
-                            onSubmit={(e) => {
-                                e.preventDefault();
-                                createFolder();
-                            }}
-                              className="flex space-x-2 mx-4 mb-4">
-                            <input
-                                type="text"
-                                value={newFolder}
-                                onChange={(e) => setNewFolder(e.target.value)}
-                                placeholder="Enter folder name"
-                                className="border p-2 rounded-md w-full"
-                            />
-                            <button
-                                type="submit"
-                                className="bg-blue-600 text-white px-4 py-1 rounded-md">
-                                Save
-                            </button>
-                        </form>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            createFolder();
+                        }}
+                        className="flex space-x-2 mx-4 mb-4">
+                        <input
+                            type="text"
+                            value={newFolder}
+                            onChange={(e) => setNewFolder(e.target.value)}
+                            placeholder="Enter folder name"
+                            className="border p-2 rounded-md w-full"
+                        />
+                        <button
+                            type="submit"
+                            className="bg-blue-600 text-white px-4 py-1 rounded-md">
+                            Save
+                        </button>
+                    </form>
 
                 ) : (
                     <div className="flex justify-end">

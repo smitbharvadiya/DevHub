@@ -128,7 +128,7 @@ export default function Profile({ user }) {
                 </div>
 
                 {/* <p>{new Date(user.created_at).toLocaleString()}</p> */}
-                <div className="h-8 w-35 border-1 border-black text-black hover:bg-black hover:text-white flex justify-center items-center rounded-full transition-all duration-400 ease-in-out  px-4 py-2">
+                <div className="h-8 w-35 border-1 border-black text-black hover:bg-black hover:text-white flex justify-center items-center rounded-full transition-all duration-400 ease-in-out cursor-pointer px-4 py-2">
                     <a href={user.url} target="_blank" rel="noopener noreferrer">
                         <FontAwesomeIcon icon={faGithub} className="mr-2" />
                         View GitHub
