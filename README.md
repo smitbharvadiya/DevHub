@@ -1,13 +1,13 @@
 
-# DEVHUB
+<h1 align="center">DEVHUB</h1>
 
 
-## ✨ What is DevHub?
+### ✨ What is DevHub?
 
 **DevHub** is a next-gen GitHub dashboard that transforms any developer’s public GitHub profile into an insightful, interactive visualization. Whether you're reviewing your own code journey or analyzing others, DevHub brings your GitHub to life.
 
 
-### Why DevHub?
+### 🔍 Why DevHub?
 
 This project aims to streamline GitHub data exploration and project management through a modern, scalable interface. The core features include:
 
@@ -56,7 +56,7 @@ Install my-project with npm
 Contributions are welcome! Open an issue or submit a pull request to suggest improvements or new features.
 
 
-## License
+## 📄 License
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
@@ -66,7 +66,4 @@ Contributions are welcome! Open an issue or submit a pull request to suggest imp
 https://dev-hub-blond.vercel.app/
 
 
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
