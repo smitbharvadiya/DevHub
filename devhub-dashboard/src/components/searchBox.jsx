@@ -6,13 +6,27 @@ import { useNavigate } from 'react-router-dom';
 
 export default function SearchBox() {
     let [username, setUsername] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (username.trim()) {
-            navigate(`/user/${username}`);
+        if (!username.trim()) return;
+
+        setError("");
+
+        try {
+            const res = await fetch(`https://api.github.com/users/${username.trim()}`);
+            if (res.status === 200) {
+                navigate(`/user/${username.trim()}`);
+            } else if (res.status === 404) {
+                setError("User not found. Please enter a valid GitHub username.");
+            } else {
+                setError("Something went wrong. Try again later.");
+            }
+        } catch (err) {
+            setError("Failed to connect to GitHub. Check your connection.");
         }
     };
 
@@ -28,7 +42,12 @@ export default function SearchBox() {
                     <button type="submit" className="min-w-[30px] min-h-[30px] sm:min-w-[36px] sm:min-h-[36px] rounded-full bg-black flex justify-center items-center text-white"><FontAwesomeIcon icon={faGithub} className="text-lg" /></button>
                 </div>
             </form>
-            <p className="pt-20 text-gray-500 text-sm text-center max-w-md"
+
+            {error && (
+                <p className="text-red-500 text-sm mt-2 max-w-xs text-center">{error}</p>
+            )}
+
+            <p className="pt-14 text-gray-500 text-sm text-center max-w-md"
             >Try searching for popular GitHub users like:</p>
             <div className="flex justify-center space-x-4 mt-2">
                 <button
