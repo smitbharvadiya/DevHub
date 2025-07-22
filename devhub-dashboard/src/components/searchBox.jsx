@@ -12,7 +12,10 @@ export default function SearchBox() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!username.trim()) return;
+        if (!username.trim()) {
+            setError("Please enter a GitHub username.");
+            return;
+        }
 
         setError("");
 
