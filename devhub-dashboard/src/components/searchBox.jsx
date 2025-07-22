@@ -39,7 +39,16 @@ export default function SearchBox() {
             <form onSubmit={handleSubmit} className="pb-4">
                 <div className="flex justify-between items-center rounded-full shadow px-2 py-1 w-[260px] sm:w-[300px]">
                     <input value={username} onChange={(e) => { setUsername(e.target.value) }} className="flex-grow text-sm px-4 py-2 rounded-full focus:outline-none focus:ring-0 focus:border-transparent w-full h-full" type="text" placeholder="Enter GitHub username..." />
-                    <button type="submit" className="min-w-[30px] min-h-[30px] sm:min-w-[36px] sm:min-h-[36px] rounded-full bg-black flex justify-center items-center text-white"><FontAwesomeIcon icon={faGithub} className="text-lg" /></button>
+                    <button
+                        type="submit"
+                        className="min-w-[30px] min-h-[30px] sm:min-w-[36px] sm:min-h-[36px] 
+             rounded-full bg-black text-white 
+             flex justify-center items-center 
+             transition-transform duration-150 ease-in-out 
+             active:scale-90"
+                    >
+                        <FontAwesomeIcon icon={faGithub} className="text-lg" />
+                    </button>
                 </div>
             </form>
 

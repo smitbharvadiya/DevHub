@@ -24,6 +24,8 @@ export default function Dashboard() {
     const [aiSummary, setAISummary] = useState("");
     const [loadingSummary, setLoadingSummary] = useState(true);
     const [commitHeatmap, setCommitheatmap] = useState([]);
+    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         const loadData = async () => {
@@ -60,9 +62,23 @@ export default function Dashboard() {
                 setRepos([]);
                 setLanguageStats({})
                 setError(err.message);
+            } finally {
+                setLoading(false);
             }
-        }
-        loadData()
+        };
+
+        setUser(null);
+        setRepos([]);
+        setLanguageStats({});
+        setError("");
+        setAISummary("");
+        setCommit([]);
+        setReadme([]);
+        setCommitheatmap([]);
+        setLoadingSummary(true);
+
+
+        loadData();
 
     }, [username]);
 
@@ -158,12 +174,17 @@ export default function Dashboard() {
     }, [readme, repos, commit]);
 
 
-    if (!user) return <div className="flex justify-center items-center max-h-[300px] w-full h-full bg-white">
-        <Lottie animationData={pageLoading} loop={true} className="w-40 h-40" />
-    </div>;
-    if (error) return <p className="text-red-500 text-center mt-4">{error}</p>;
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen bg-white">
+                <Lottie animationData={pageLoading} loop={true} className="w-40 h-40" />
+            </div>
+        );
+    }
 
-
+    if (error) {
+        return <p className="text-red-500 text-center mt-4">{error}</p>;
+    }
 
     return (
         <div className="bg-myWhite">

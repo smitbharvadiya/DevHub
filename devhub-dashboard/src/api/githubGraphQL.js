@@ -7,9 +7,9 @@ export const detectGitHubEntityType = async (username) => {
     const res = await fetch(`https://api.github.com/users/${username}`);
     const data = await res.json();
 
-  if (!res.ok) {
-  throw new Error(`GitHub API Error (${res.status}): ${data.message || 'Unknown error'}`);
-}
+    if (!res.ok) {
+      throw new Error(`GitHub API Error (${res.status}): ${data.message || 'Unknown error'}`);
+    }
 
     return data.type; // 'User' or 'Organization'
   } catch (err) {
